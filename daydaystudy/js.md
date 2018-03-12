@@ -19,3 +19,11 @@
 
 5. ES6 中对象的属性和方法可以简写
 
+6. 在`sessionStorage`、`localStorage`中存储对象和数组的时候。
+
+        const obj = {abc: '123'};
+        sessionStorage.setItem('a',JSON.stringfy(obj));
+        const obj0 = JSON.parse(sessionStorage.getItem('a'));
+
+
+
