@@ -25,5 +25,13 @@
         sessionStorage.setItem('a',JSON.stringfy(obj));
         const obj0 = JSON.parse(sessionStorage.getItem('a'));
 
+7. 使用tree命令生成目录结构树
+
+    在命令行工具中使用: `Tree [drive:][path] [/F] [/A]`，例如：
+
+        Tree C: /F >C:\TXT\Filelist.txt    //可以将C盘上所有文件夹中的文件列表保存到“C:\TXT\Filelist.txt”文件中
+
+8. 
+
 
 
