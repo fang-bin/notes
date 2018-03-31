@@ -26,6 +26,18 @@
 
 * 方法二：Object.assign()
 
+    Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+
+    Object.assign方法的第一个参数是目标对象，后面的参数都是源对象。
+
+    注意，如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+
+    如果只有一个参数，Object.assign会直接返回该参数。如果该参数不是对象，则会先转成对象，然后返回。
+
+    由于undefined和null无法转成对象，所以如果它们作为参数，就会报错。如果非对象参数出现在源对象的位置（即非首参数），那么处理规则有所不同。首先，这些参数都会转成对象，如果无法转成对象，就会跳过。这意味着，如果undefined和null不在首参数，就不会报错。
+
+    Object.assign方法实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。
+
 ## 深克隆
 
 * JSON.parse方法
@@ -61,5 +73,61 @@
         }
 
     （此方法也会出现上面的问题）
+
+    构造一个深克隆函数
+
+        /**
+        * deep clone
+        * @param  {[type]} parent object 需要进行克隆的对象
+        * @return {[type]}        深克隆后的对象
+        */
+        const clone = parent => {
+        // 维护两个储存循环引用的数组
+        const parents = [];
+        const children = [];
+
+        const _clone = parent => {
+            if (parent === null) return null;
+            if (typeof parent !== 'object') return parent;
+
+            let child, proto;
+
+            if (isType(parent, 'Array')) {
+            // 对数组做特殊处理
+            child = [];
+            } else if (isType(parent, 'RegExp')) {
+            // 对正则对象做特殊处理
+            child = new RegExp(parent.source, getRegExp(parent));
+            if (parent.lastIndex) child.lastIndex = parent.lastIndex;
+            } else if (isType(parent, 'Date')) {
+            // 对Date对象做特殊处理
+            child = new Date(parent.getTime());
+            } else {
+            // 处理对象原型
+            proto = Object.getPrototypeOf(parent);
+            // 利用Object.create切断原型链
+            child = Object.create(proto);
+            }
+
+            // 处理循环引用
+            const index = parents.indexOf(parent);
+
+            if (index != -1) {
+            // 如果父数组存在本对象,说明之前已经被引用过,直接返回此对象
+            return children[index];
+            }
+            parents.push(parent);
+            children.push(child);
+
+            for (let i in parent) {
+            // 递归
+            child[i] = _clone(parent[i]);
+            }
+
+            return child;
+        };
+        return _clone(parent);
+        };
+
 
     
