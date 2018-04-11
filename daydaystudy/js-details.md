@@ -1,6 +1,8 @@
 - [深克隆和浅克隆](#%E6%B7%B1%E5%85%8B%E9%9A%86%E5%92%8C%E6%B5%85%E5%85%8B%E9%9A%86)
     - [浅克隆](#%E6%B5%85%E5%85%8B%E9%9A%86)
     - [深克隆](#%E6%B7%B1%E5%85%8B%E9%9A%86)
+- [深入理解javascript中的 typeof 和 instanceof](#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3javascript%E4%B8%AD%E7%9A%84-typeof-%E5%92%8C-instanceof)
+- [深入理解javascript中的 this](#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3javascript%E4%B8%AD%E7%9A%84-this)
 
 # 深克隆和浅克隆
 
@@ -133,4 +135,10 @@
         return _clone(parent);
         };
 
+# 深入理解javascript中的 typeof 和 instanceof
 
+[相关链接](https://blog.csdn.net/mevicky/article/details/50353881)
+
+# 深入理解javascript中的 this
+
+[相关链接](https://blog.csdn.net/mevicky/article/details/46659273)
